@@ -2,6 +2,13 @@
 Changelog for package tiago_pro_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fix identation
+* use same wrist model for teleop arms
+* Adding torso in config file of cartesian controller
+* Contributors: ileniaperrella, vivianamorlando
+
 2.1.2 (2026-03-31)
 ------------------
 
