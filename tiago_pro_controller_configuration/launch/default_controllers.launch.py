@@ -79,7 +79,8 @@ def declare_actions(launch_description: LaunchDescription, launch_args: LaunchAr
         condition=IfCondition(
             PythonExpression([
                 "(", LaunchConfiguration("torque_estimation"), ") and (('",
-                LaunchConfiguration("wrist_model_right"), "' != 'short-wrist') or ('",
+                LaunchConfiguration(
+                    "wrist_model_right"), "' != 'short-wrist') or ('",
                 LaunchConfiguration("wrist_model_left"), "' != 'short-wrist'))"
             ])
         )
@@ -125,13 +126,15 @@ def declare_actions(launch_description: LaunchDescription, launch_args: LaunchAr
 
 
 def configure_side_controllers(context, end_effector_side='right', *args, **kwargs):
-    wrist_model = read_launch_argument(f'wrist_model_{end_effector_side}', context)
+    has_teleop_arms = read_launch_argument('has_teleop_arms', context)
 
-    is_teleop = end_effector_side.startswith('teleop')
-
-    if is_teleop:
+    if has_teleop_arms:
+        wrist_model = read_launch_argument(
+            f'wrist_model_{end_effector_side.replace("teleop_", "")}', context)
         root_link_str = "pilot_station_base_link"
     else:
+        wrist_model = read_launch_argument(
+            f'wrist_model_{end_effector_side}', context)
         root_link_str = "torso_lift_link"
 
     end_effector_arg_name = concatenate_strings(
@@ -159,7 +162,8 @@ def configure_side_controllers(context, end_effector_side='right', *args, **kwar
         condition=IfCondition(
             PythonExpression(
                 ["'", LaunchConfiguration('use_sim_time'), "' == 'False' and '",
-                 LaunchConfiguration('torque_estimation'), "' == 'True' and not ('",
+                 LaunchConfiguration(
+                     'torque_estimation'), "' == 'True' and not ('",
                  wrist_model, "' == 'short-wrist')"]
             )
         ))
