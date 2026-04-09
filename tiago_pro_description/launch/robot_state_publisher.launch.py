@@ -23,7 +23,6 @@ from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument, OpaqueFunction, SetLaunchConfiguration
 from launch_ros.actions import Node
-from launch_ros.parameter_descriptions import ParameterValue
 from launch_param_builder import load_xacro
 
 from launch_pal.arg_utils import LaunchArgumentsBase, read_launch_argument
