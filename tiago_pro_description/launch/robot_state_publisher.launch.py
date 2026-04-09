@@ -23,6 +23,7 @@ from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument, OpaqueFunction, SetLaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 from launch_param_builder import load_xacro
 
 from launch_pal.arg_utils import LaunchArgumentsBase, read_launch_argument
@@ -59,6 +60,7 @@ class LaunchArguments(LaunchArgumentsBase):
     is_public_sim: DeclareLaunchArgument = CommonArgs.is_public_sim
     calibration_tool: DeclareLaunchArgument = TiagoProArgs.calibration_tool
     wheel_model: DeclareLaunchArgument = TiagoProArgs.wheel_model
+    gazebo_version: DeclareLaunchArgument = CommonArgs.gazebo_version
 
 
 def declare_actions(launch_description: LaunchDescription, launch_args: LaunchArguments):
@@ -107,7 +109,8 @@ def create_robot_description_param(context, *args, **kwargs):
         'is_public_sim': read_launch_argument('is_public_sim', context),
         'has_teleop_arms': read_launch_argument('has_teleop_arms', context),
         'has_wrist_camera': read_launch_argument('has_wrist_camera', context),
-        'wheel_model': read_launch_argument('wheel_model', context)
+        'wheel_model': read_launch_argument('wheel_model', context),
+        'gazebo_version': read_launch_argument('gazebo_version', context),
     }
 
     calibration_dir = tempfile.TemporaryDirectory()
