@@ -130,7 +130,7 @@ def configure_side_controllers(context, end_effector_side='right', *args, **kwar
 
     if is_teleop:
         wrist_model = read_launch_argument(
-            f'wrist_model_{end_effector_side.replace("teleop_", "")}', context)  
+            f'wrist_model_{end_effector_side.replace("teleop_", "")}', context)
         root_link_str = "pilot_station_base_link"
     else:
         wrist_model = read_launch_argument(
