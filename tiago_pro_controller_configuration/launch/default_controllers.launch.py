@@ -126,12 +126,11 @@ def declare_actions(launch_description: LaunchDescription, launch_args: LaunchAr
 
 
 def configure_side_controllers(context, end_effector_side='right', *args, **kwargs):
-    is_teleop = end_effector_side.startswith('teleop')    
-    
+    is_teleop = end_effector_side.startswith('teleop')
+
     if is_teleop:
         wrist_model = read_launch_argument(
-            f'wrist_model_{end_effector_side.replace("teleop_", "")}', context)
-        
+            f'wrist_model_{end_effector_side.replace("teleop_", "")}', context)  
         root_link_str = "pilot_station_base_link"
     else:
         wrist_model = read_launch_argument(
