@@ -2,6 +2,11 @@
 Changelog for package tiago_pro_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add arguments to support the new gazebo
+* Contributors: thomaspeyrucain
+
 2.1.3 (2026-04-08)
 ------------------
 
