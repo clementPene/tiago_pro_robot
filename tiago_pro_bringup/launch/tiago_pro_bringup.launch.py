@@ -49,6 +49,7 @@ class LaunchArguments(LaunchArgumentsBase):
     use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
     namespace: DeclareLaunchArgument = CommonArgs.namespace
     is_public_sim: DeclareLaunchArgument = CommonArgs.is_public_sim
+    gazebo_version: DeclareLaunchArgument = CommonArgs.gazebo_version
 
 
 def declare_actions(launch_description: LaunchDescription, launch_args: LaunchArguments):
@@ -119,6 +120,7 @@ def declare_actions(launch_description: LaunchDescription, launch_args: LaunchAr
                           "namespace": launch_args.namespace,
                           "use_sim_time": launch_args.use_sim_time,
                           "is_public_sim": launch_args.is_public_sim,
+                          "gazebo_version": launch_args.gazebo_version,
                           "has_teleop_arms": launch_args.has_teleop_arms,
                           "has_wrist_camera": launch_args.has_wrist_camera
                           })

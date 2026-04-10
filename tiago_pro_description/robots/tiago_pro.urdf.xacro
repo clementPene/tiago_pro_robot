@@ -15,7 +15,7 @@
   limitations under the License.
 -->
 
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="tiago_pro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro" xmlns:gz="http://gazebosim.org/schema" name="tiago_pro">
 
   <!-- ARGUMENTS -->
 
@@ -403,6 +403,6 @@
   </xacro:if>
 
   <!-- ROS 2 Control -->
-  <xacro:tiago_pro_ros2_control use_sim_time="$(arg use_sim_time)" has_teleop_arms="${has_teleop_arms}"/>
+  <xacro:tiago_pro_ros2_control use_sim_time="$(arg use_sim_time)" has_teleop_arms="${has_teleop_arms}" gazebo_version="${gazebo_version}"/>
 
 </robot>

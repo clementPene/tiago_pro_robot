@@ -122,7 +122,7 @@
     <xacro:ros2_control_head_joint name="head_2" reduction="1.0" offset_value="${head_2_joint_offset}" />
   </xacro:macro>
 
-  <xacro:macro name="tiago_pro_ros2_control" params="use_sim_time:=^|false has_teleop_arms:=^|false">
+  <xacro:macro name="tiago_pro_ros2_control" params="use_sim_time:=^|false has_teleop_arms:=^|false gazebo_version:=^|classic">
 
     <xacro:arg name="arm_type_left" default="tiago-pro"/>
     <xacro:arg name="arm_type_right" default="tiago-pro"/>
@@ -177,14 +177,28 @@
     <xacro:if value="$(arg use_sim_time)">
       <!-- Init the ROS 2 control gazebo interface -->
       <gazebo>
-        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
-          <parameters>$(find tiago_pro_description)/ros2_control/gazebo_controller_manager_cfg.yaml</parameters>
-        </plugin>
+        <xacro:if value="${gazebo_version == 'classic'}">
+          <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <parameters>$(find tiago_pro_description)/ros2_control/gazebo_controller_manager_cfg.yaml</parameters>
+          </plugin>
+        </xacro:if>
+        <xacro:if value="${gazebo_version == 'gazebo'}">
+          <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher</robot_param_node>
+            <parameters>$(find tiago_pro_description)/ros2_control/gazebo_controller_manager_cfg.yaml</parameters>
+          </plugin>
+        </xacro:if>
       </gazebo>
 
       <ros2_control name="ros2_control_gazebo_system" type="system">
         <hardware>
-          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+          <xacro:if value="${gazebo_version == 'classic'}">
+            <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+          </xacro:if>
+          <xacro:if value="${gazebo_version == 'gazebo'}">
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+          </xacro:if>
         </hardware>
 
         <!-- wheels -->
@@ -221,9 +235,20 @@
       <xacro:if value="${wheel_model == 'moog'}">
         <!-- CAN system -->
         <ros2_control name="ros2_control_tiago_pro_system_can" type="system" rw_rate="100">
+          <!-- Execution env config -->
           <hardware>
-            <plugin>robot_control/RobotControl</plugin>
-            <param name="group">can</param>
+            <xacro:if value="${use_sim_time}">
+              <xacro:if value="${gazebo_version == 'classic'}">
+                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+              </xacro:if>
+              <xacro:if value="${gazebo_version == 'gazebo'}">
+                <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+              </xacro:if>
+            </xacro:if>
+            <xacro:unless value="${use_sim_time}">
+              <plugin>robot_control/RobotControl</plugin>
+              <param name="group">can</param>
+            </xacro:unless>
           </hardware>
 
           <!-- wheels -->
@@ -235,8 +260,18 @@
       <!-- Dynamixels system -->
       <ros2_control name="ros2_control_tiago_pro_system_dynamixel" type="system" rw_rate="100">
         <hardware>
-          <plugin>robot_control/RobotControl</plugin>
-          <param name="group">dynamixel</param>
+          <xacro:if value="${use_sim_time}">
+            <xacro:if value="${gazebo_version == 'classic'}">
+              <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            </xacro:if>
+            <xacro:if value="${gazebo_version == 'gazebo'}">
+              <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+            </xacro:if>
+          </xacro:if>
+          <xacro:unless value="${use_sim_time}">
+            <plugin>robot_control/RobotControl</plugin>
+            <param name="group">dynamixel</param>
+          </xacro:unless>
         </hardware>
 
         <!-- head -->
@@ -247,12 +282,22 @@
       <!-- Ethercat system -->
       <ros2_control name="ros2_control_tiago_pro_system_ethercat" type="system" rw_rate="1000">
         <hardware>
+          <xacro:if value="${use_sim_time}">
+            <xacro:if value="${gazebo_version == 'classic'}">
+              <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            </xacro:if>
+            <xacro:if value="${gazebo_version == 'gazebo'}">
+              <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+            </xacro:if>
+          </xacro:if>
+          <xacro:unless value="${use_sim_time}">
           <plugin>robot_control/RobotControl</plugin>
-          <param name="group">ethercat</param>
-          <param name="error_protection">true</param>
-          <param name="idle_mode_on_stop">true</param>
-          <param name="expose_collision_interface">true</param>
-          <param name="expose_safety_interface">true</param>
+            <param name="group">ethercat</param>
+            <param name="error_protection">true</param>
+            <param name="idle_mode_on_stop">true</param>
+            <param name="expose_collision_interface">true</param>
+            <param name="expose_safety_interface">true</param>
+          </xacro:unless>
         </hardware>
 
         <!-- arms -->
