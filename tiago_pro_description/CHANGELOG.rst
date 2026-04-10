@@ -2,8 +2,8 @@
 Changelog for package tiago_pro_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+2.2.0 (2026-04-10)
+------------------
 * Fix jobs
 * Add safety controller to prevent the torso to get stuck in simulation with a small epsilon
 * Add arguments to support the new gazebo
