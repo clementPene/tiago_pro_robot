@@ -2,6 +2,11 @@
 Changelog for package tiago_pro_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add the type string due the issue that is not yet fixed in this release
+* Contributors: thomas.peyrucain
+
 2.2.1 (2026-04-13)
 ------------------
 
