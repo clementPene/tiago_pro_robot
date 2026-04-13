@@ -23,6 +23,7 @@ from launch import LaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument, OpaqueFunction, SetLaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 from launch_param_builder import load_xacro
 
 from launch_pal.arg_utils import LaunchArgumentsBase, read_launch_argument
@@ -67,11 +68,20 @@ def declare_actions(launch_description: LaunchDescription, launch_args: LaunchAr
     launch_description.add_action(OpaqueFunction(
         function=create_robot_description_param))
 
+    # Using ParameterValue is needed so ROS knows the parameter type
+    # Otherwise https://github.com/ros2/launch_ros/issues/136
     rsp = Node(package='robot_state_publisher',
                executable='robot_state_publisher',
                output='both',
-               parameters=[{'use_sim_time': LaunchConfiguration('use_sim_time'),
-                            'robot_description': LaunchConfiguration('robot_description')}])
+               parameters=[
+                   {
+                       'use_sim_time': LaunchConfiguration('use_sim_time'),
+                       "robot_description": ParameterValue(
+                           LaunchConfiguration("robot_description"), value_type=str
+                       ),
+                   }
+               ],
+               )
 
     launch_description.add_action(rsp)
 
