@@ -52,6 +52,12 @@ def declare_actions(launch_description: LaunchDescription, launch_args: LaunchAr
 
     launch_description.add_action(pal_impedance_control)
 
+    arm_pos_control = GroupAction([generate_load_controller_launch_description(
+        controller_name=LaunchConfiguration("pos_controller_name"),
+        controller_params_file=LaunchConfiguration("controller_config"),
+        extra_spawner_args=["--inactive"])])
+
+    launch_description.add_action(arm_pos_control)
     return
 
 
@@ -96,6 +102,7 @@ def setup_controller_configuration(context: LaunchContext):
 
     return [
         SetLaunchConfiguration("controller_name", controller_name),
+        SetLaunchConfiguration("pos_controller_name", f"arm_{side}_pos_controller"),
         SetLaunchConfiguration("controller_config", parsed_yaml),
     ]
 
