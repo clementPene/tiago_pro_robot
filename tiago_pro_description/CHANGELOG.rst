@@ -2,6 +2,11 @@
 Changelog for package tiago_pro_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Remove gazebo plugins from the hardware side
+* Contributors: Noel Jimenez
+
 2.2.2 (2026-04-13)
 ------------------
 * Add the type string due the issue that is not yet fixed in this release
