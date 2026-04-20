@@ -2,6 +2,12 @@
 Changelog for package tiago_pro_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* modify the launch and config file in order to use correctly the chained
+  impedance
+* Contributors: ileniaperrella
+
 2.2.3 (2026-04-20)
 ------------------
 
