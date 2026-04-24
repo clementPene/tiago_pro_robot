@@ -2,6 +2,11 @@
 Changelog for package tiago_pro_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* reduce gripper motion for open from 0.079 to 0.07
+* Contributors: ileniaperrella
+
 2.2.4 (2026-04-20)
 ------------------
 
