@@ -140,7 +140,10 @@ def setup_torso_controllers(context, *args, **kwargs):
     return controllers_to_start
 
 
-def setup_torso_controller(context, controller_name, load_gains_separately=False):
+def setup_torso_controller(
+        context,
+        controller_name,
+        load_gains_separately=False):
     param_file = os.path.join(
         get_package_share_directory("tiago_pro_controller_configuration"),
         "config",
@@ -220,11 +223,11 @@ def setup_arm_side_controller(
 
     # Creating the end effector frame name with side
     if use_grasping_frame == "False":
-        ee_suffix = f"7_link"
-        ee_prefix = f"arm"
+        ee_suffix = "7_link"
+        ee_prefix = "arm"
     elif use_grasping_frame == "True":
-        ee_suffix = f"grasping_link"
-        ee_prefix = f"gripper"
+        ee_suffix = "grasping_link"
+        ee_prefix = "gripper"
 
     remappings = {"ARM_SIDE_PREFIX": arm_prefix,
                   "SIDE": arm_side,
