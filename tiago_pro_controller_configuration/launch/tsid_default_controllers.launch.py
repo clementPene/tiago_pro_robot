@@ -51,7 +51,7 @@ class LaunchArguments(LaunchArgumentsBase):
     arm_type_left: DeclareLaunchArgument = TiagoProArgs.arm_type_left
     use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
     namespace: DeclareLaunchArgument = CommonArgs.namespace
-    use_grasping_frame : DeclareLaunchArgument = DeclareLaunchArgument(
+    use_grasping_frame: DeclareLaunchArgument = DeclareLaunchArgument(
         name="use_grasping_frame",
         default_value="False",
         choices=["True", "False"],
@@ -215,26 +215,22 @@ def setup_arm_side_controller(
     arm_prefix = f"arm_{arm_side}"
     side_controller_name = f"{arm_prefix}_{controller_name}"
 
-    # Check if the end effector frame needs to be the grasping one 
+    # Check if the end effector frame needs to be the grasping one
     use_grasping_frame = read_launch_argument("use_grasping_frame", context)
 
     # Creating the end effector frame name with side
-    if use_grasping_frame == "False" : 
+    if use_grasping_frame == "False":
         ee_suffix = f"7_link"
         ee_prefix = f"arm"
     elif use_grasping_frame == "True":
         ee_suffix = f"grasping_link"
         ee_prefix = f"gripper"
-    
-
 
     remappings = {"ARM_SIDE_PREFIX": arm_prefix,
                   "SIDE": arm_side,
-                  "EE_PREFIX": ee_prefix, 
+                  "EE_PREFIX": ee_prefix,
                   "EE_SUFFIX": ee_suffix
                   }
-    
-
 
     param_file = os.path.join(
         get_package_share_directory("tiago_pro_controller_configuration"),
