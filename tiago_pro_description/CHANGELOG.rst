@@ -2,6 +2,11 @@
 Changelog for package tiago_pro_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* added option d435i as default
+* Contributors: martinaannicelli
+
 2.2.5 (2026-04-24)
 ------------------
 
