@@ -76,8 +76,8 @@
   <!-- no-ft-sensor, rokubi -->
   <xacro:arg name="ft_sensor_teleop_right" default="no-ft-sensor" />
 
-  <!-- realsense-d435 -->
-  <xacro:arg name="camera_model" default="realsense-d435" />
+  <!-- realsense-d435i -->
+  <xacro:arg name="camera_model" default="realsense-d435i" />
 
   <!-- limits v2 -->
   <xacro:arg name="limits_v2" default="False" />
@@ -334,7 +334,7 @@
     </xacro:if>
 
     <xacro:if value="${has_wrist_camera}">
-      <xacro:pal_sea_arm_end_effector_camera name="gripper_left" parent="${end_effector_left_link}" type="realsense-d435" camera_position="up"/>
+      <xacro:pal_sea_arm_end_effector_camera name="gripper_left" parent="${end_effector_left_link}" type="realsense-d435i" camera_position="up"/>
     </xacro:if>
 
     <!-- FT sensors -->
@@ -358,7 +358,7 @@
     </xacro:if>
 
     <xacro:if value="${has_wrist_camera}">
-      <xacro:pal_sea_arm_end_effector_camera name="gripper_right" parent="${end_effector_right_link}" type="realsense-d435" camera_position="up"/>
+      <xacro:pal_sea_arm_end_effector_camera name="gripper_right" parent="${end_effector_right_link}" type="realsense-d435i" camera_position="up"/>
     </xacro:if>
 
     <!-- FT sensors -->
