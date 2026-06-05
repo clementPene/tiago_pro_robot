@@ -2,6 +2,11 @@
 Changelog for package tiago_pro_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* revert d435 camera in robot configuration
+* Contributors: ileniaperrella
+
 2.3.0 (2026-05-21)
 ------------------
 * added option d435i as default
