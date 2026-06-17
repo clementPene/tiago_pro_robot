@@ -51,7 +51,7 @@ class LaunchArguments(LaunchArgumentsBase):
     arm_type_left: DeclareLaunchArgument = TiagoProArgs.arm_type_left
     use_sim_time: DeclareLaunchArgument = CommonArgs.use_sim_time
     namespace: DeclareLaunchArgument = CommonArgs.namespace
-    
+
     controllers_to_spawn: DeclareLaunchArgument = DeclareLaunchArgument(
         "controllers_to_spawn",
         default_value="",
@@ -84,7 +84,7 @@ def declare_actions(
         condition=LaunchConfigurationNotEquals("arm_type_left", "no-arm"),
     )
     launch_description.add_action(left_arm_controller)
-    
+
     torso_controller = OpaqueFunction(function=setup_torso_controllers)
     launch_description.add_action(torso_controller)
 
@@ -99,18 +99,18 @@ def validate_controllers(context, *args, **kwargs):
         return []
 
     target_controllers = [c.strip() for c in target_controllers_str.split(",") if c.strip()]
-    
+
     # Find any controllers provided by the user that aren't in the allowed list
     invalid_controllers = [c for c in target_controllers if c not in AVAILABLE_CONTROLLERS]
-    
+
     if invalid_controllers:
         raise ValueError(
-            "\n\n[ERROR] Invalid controller name(s) provided in 'controllers_to_spawn': " 
+            "\n\n[ERROR] Invalid controller name(s) provided in 'controllers_to_spawn': "
             f"{invalid_controllers}.\n"
             f"Please ensure you spelled them correctly.\n"
             f"Valid options are:\n- " + "\n- ".join(AVAILABLE_CONTROLLERS) + "\n"
         )
-        
+
     return []
 
 
@@ -124,7 +124,7 @@ def setup_torso_controllers(context, *args, **kwargs):
     ]
 
     controllers_to_start = []
-    
+
     for ctrl in available_controllers:
         if not target_controllers or ctrl in target_controllers:
             controllers_to_start.append(
@@ -193,7 +193,7 @@ def setup_arm_controllers(context, arm_side, *args, **kwargs):
 
     for base_ctrl in available_base_controllers:
         full_ctrl_name = f"arm_{arm_side}_{base_ctrl}"
-        
+
         if not target_controllers or full_ctrl_name in target_controllers:
             controllers_to_start.append(
                 setup_arm_side_controller(context, base_ctrl, arm_side, load_gains_separately=True)
