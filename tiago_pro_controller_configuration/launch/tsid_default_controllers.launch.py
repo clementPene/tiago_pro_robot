@@ -56,7 +56,8 @@ class LaunchArguments(LaunchArgumentsBase):
         "controllers_to_spawn",
         default_value="",
         description=(
-            "Comma-separated list of controllers to launch. If empty, all default controllers are launched. "
+            "Comma-separated list of controllers to launch. "
+            "If empty, all default controllers are launched. "
             f"Valid options are: {', '.join(AVAILABLE_CONTROLLERS)}"
         )
     )
@@ -92,7 +93,7 @@ def declare_actions(
 
 def validate_controllers(context, *args, **kwargs):
     target_controllers_str = read_launch_argument("controllers_to_spawn", context)
-    
+
     # If empty, spawn every controller
     if not target_controllers_str:
         return []
@@ -104,7 +105,8 @@ def validate_controllers(context, *args, **kwargs):
     
     if invalid_controllers:
         raise ValueError(
-            f"\n\n[ERROR] Invalid controller name(s) provided in 'controllers_to_spawn': {invalid_controllers}.\n"
+            "\n\n[ERROR] Invalid controller name(s) provided in 'controllers_to_spawn': " 
+            f"{invalid_controllers}.\n"
             f"Please ensure you spelled them correctly.\n"
             f"Valid options are:\n- " + "\n- ".join(AVAILABLE_CONTROLLERS) + "\n"
         )
