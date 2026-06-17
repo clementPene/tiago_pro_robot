@@ -2,6 +2,13 @@
 Changelog for package tiago_pro_controller_configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* ci/cd test
+* ci/cd errors
+* defined argument to spawn a subset of tsid controllers specified in the list at the beginning of the launch file
+* Contributors: francescodorazio
+
 2.4.0 (2026-06-05)
 ------------------
 

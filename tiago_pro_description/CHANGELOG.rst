@@ -2,6 +2,11 @@
 Changelog for package tiago_pro_description
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* frequency of ros2_controllers in simulation from 100Hz to 1kHz
+* Contributors: francescodorazio
+
 2.4.0 (2026-06-05)
 ------------------
 * revert d435 camera in robot configuration
