@@ -53,7 +53,7 @@ class LaunchArguments(LaunchArgumentsBase):
     namespace: DeclareLaunchArgument = CommonArgs.namespace
     use_grasping_frame: DeclareLaunchArgument = DeclareLaunchArgument(
         name="use_grasping_frame",
-        default_value="False",
+        default_value="True",
         choices=["True", "False"],
         description="If true the cartesian controller is going to move the grasping frame.",
     )
